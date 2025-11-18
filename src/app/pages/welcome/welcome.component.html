@@ -1,0 +1,60 @@
+<div class="container-fluid vh-100 d-flex align-items-center justify-content-center bg-gradient">
+  <div class="row w-100">
+    <div class="col-lg-8 col-xl-6 mx-auto">
+      <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body p-5 text-center">
+          <div class="mb-4">
+            <i class="bi bi-check-circle-fill text-success" style="font-size: 4rem;"></i>
+          </div>
+          
+          <h1 class="display-4 fw-bold text-primary mb-3">¡Bienvenido!</h1>
+          
+          <h2 class="h3 text-muted mb-4">Hola, <span class="text-primary fw-bold">{{ username }}</span></h2>
+          
+          <p class="lead text-muted mb-4">
+            Has iniciado sesión exitosamente en la aplicación demo de GBM Cloud Native.
+          </p>
+          
+          <div class="row g-3 mb-4">
+            <div class="col-md-4">
+              <div class="card bg-light border-0 h-100">
+                <div class="card-body text-center">
+                  <i class="bi bi-cloud-check text-primary mb-2" style="font-size: 2rem;"></i>
+                  <h6 class="card-title">Cloud Native</h6>
+                  <small class="text-muted">Arquitectura moderna</small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card bg-light border-0 h-100">
+                <div class="card-body text-center">
+                  <i class="bi bi-shield-check text-success mb-2" style="font-size: 2rem;"></i>
+                  <h6 class="card-title">Seguro</h6>
+                  <small class="text-muted">Autenticación robusta</small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card bg-light border-0 h-100">
+                <div class="card-body text-center">
+                  <i class="bi bi-lightning-charge text-warning mb-2" style="font-size: 2rem;"></i>
+                  <h6 class="card-title">Rápido</h6>
+                  <small class="text-muted">Alto rendimiento</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+            <button class="btn btn-primary btn-lg px-4" type="button">
+              <i class="bi bi-house-door me-2"></i>Ir al Dashboard
+            </button>
+            <button class="btn btn-outline-secondary btn-lg px-4" type="button" onclick="window.location.href='/'">
+              <i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
