@@ -1,0 +1,95 @@
+# UTILIZADO PARA DESPLEGAR EN OPENSHIFT
+# Configuración de despliegue de OpenShift para angular-openshift-demo
+# Este archivo define todos los recursos necesarios para desplegar la aplicación Angular
+
+# ImageStream - Gestiona las imágenes de contenedor en OpenShift
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: angular-openshift-demo # Nombre del ImageStream ACTUALIZAR
+  namespace: joseluiss-503-dev  # Development namespace ACTUALIZAR NAMESPACE
+  labels:
+    app: angular-openshift-demo
+---
+# Deployment - Gestiona los pods de la aplicación
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: angular-openshift-demo # Nombre del deployment ACTUALIZAR
+  namespace: joseluiss-503-dev  # Namespace para el deployment ACTUALIZAR
+  labels:
+    app: angular-openshift-demo # Etiqueta para el deployment ACTUALIZAR
+    app.openshift.io/runtime: angularjs
+    app.openshift.io/runtime-version: latest
+  annotations:
+    app.openshift.io/runtime: angularjs  # Muestra el logo de Angular en la consola de OpenShift
+spec:
+  replicas: 1  # Número de instancias de pod
+  selector:
+    matchLabels:
+      app: angular-openshift-demo  # Coincide con pods que tengan esta etiqueta ACTUALIZAR
+  template:
+    metadata:
+      labels:
+        app: angular-openshift-demo  # Etiqueta del pod ACTUALIZAR
+        app.openshift.io/runtime: angularjs
+        app.openshift.io/runtime-version: latest
+    spec:
+      containers:
+        - name: angular-openshift-demo
+          # Imagen del registro interno de OpenShift  ACTUALIZAR NAMESPACE /joseluiss-503-dev/
+          image: image-registry.openshift-image-registry.svc:5000/joseluiss-503-dev/angular-openshift-demo:latest
+          imagePullPolicy: Always  # Siempre descargar la imagen más reciente
+          ports:
+            - containerPort: 8080  # Nginx sirve en el puerto 8080
+          # Verificación de salud - aplicación lista para recibir tráfico
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          # Verificación de salud - aplicación está ejecutándose
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20
+---
+# Service - Balanceador de carga interno para los pods
+apiVersion: v1
+kind: Service
+metadata:
+  name: angular-openshift-demo
+  namespace: joseluiss-503-dev  # Namespace para el servicio ACTUALIZAR NAMESPACE
+  labels:
+    app: angular-openshift-demo
+    app.openshift.io/runtime: angularjs
+    app.openshift.io/runtime-version: latest
+spec:
+  selector:
+    app: angular-openshift-demo  # Enruta tráfico a pods coincidentes
+  ports:
+    - protocol: TCP
+      port: 8080        # Puerto del servicio
+      targetPort: 8080  # Puerto del contenedor
+---
+# Route - Acceso externo a la aplicación
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: angular-openshift-demo
+  namespace: joseluiss-503-dev  # Namespace para la ruta ACTUALIZAR NAMESPACE
+  labels:
+    app: angular-openshift-demo
+    app.openshift.io/runtime: angularjs
+    app.openshift.io/runtime-version: latest
+spec:
+  to:
+    kind: Service
+    name: angular-openshift-demo  # Enruta hacia el servicio
+  port:
+    targetPort: 8080
+  tls:
+    termination: edge  # Terminación SSL en el router

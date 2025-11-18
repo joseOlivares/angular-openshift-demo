@@ -25,7 +25,7 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 ##*******************************************************************************
 ##-------------------MODIFICAR CON EL NOMBRE DEL PROYECTO ANGULAR----------------
 ##*******************************************************************************
-ARG PROJECT_NAME=angular-openShift-demo
+ARG PROJECT_NAME=angular-openshift-demo
 
 #Copy the Angular build files to the Nginx server
 COPY --from=build /app/dist/${PROJECT_NAME}/browser /usr/share/nginx/html

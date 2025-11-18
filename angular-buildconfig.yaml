@@ -1,0 +1,31 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  # angular-openshift-demo es el nombre del proyecto en OpenShift
+  name: angular-openshift-demo
+  # joseluiss-503-dev es el namespace en OpenShift, en nuestro caso es el nombre del proyecto generado en OpenShift
+  namespace: joseluiss-503-dev
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      # Colocamos el nombre de la imagen que se generará en OpenShift y la etiqueta latest para indicar que es la última versión
+      name: angular-openshift-demo:latest
+  source:
+    type: Binary
+  strategy:
+  # Usamos la estrategia Docker para construir la imagen a partir del Dockerfile
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: Dockerfile
+  triggers:
+    - type: GitHub
+      github:
+        secret: <TU_SECRETO_WEBHOOK>
+    - type: Generic
+      generic:
+        secret: <TU_SECRETO_WEBHOOK>
+    - type: ConfigChange
+    - type: ImageChange
+  resources: {}
+  runPolicy: Serial
