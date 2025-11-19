@@ -1,6 +1,8 @@
 {
   "name": "angular-openshift-demo",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Demo de despliegue de una aplicación Angular en OpenShift",
+  "author": "José Luis Olivares (https://www.linkedin.com/in/jolivaress)",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
