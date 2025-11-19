@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
+import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: 'app-welcome',
@@ -14,11 +14,10 @@ export class WelcomeComponent implements OnInit {
   username: string = '';
   showModal: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
-    const navigation = this.router.getCurrentNavigation();
-    this.username = navigation?.extras?.state?.['username'] || 'Usuario';
+    this.username = this.userService.getUsername();
   }
 
   openDashboard() {

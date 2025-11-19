@@ -2,6 +2,7 @@ import { Component, inject} from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { UserService } from '../../core/services/user.service';
 
 
 @Component({
@@ -15,6 +16,7 @@ export class LoginComponent {
 
   fb=inject(FormBuilder);
   router=inject(Router);
+  userService=inject(UserService);
   loginForm=this.fb.group({
     username: ['', [Validators.required]],
     password: ['', [Validators.required]],
@@ -26,7 +28,8 @@ export class LoginComponent {
   login(){
     if(this.loginForm.valid) {
       const username = this.loginForm.get('username')?.value;
-      this.router.navigate(['/welcome'], { state: { username } });
+      this.userService.setUsername(username);
+      this.router.navigate(['/welcome']);
     }
   }
 
