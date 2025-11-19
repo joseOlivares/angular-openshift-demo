@@ -1,80 +1,10 @@
-.custom-modal-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1050;
+// Solo animaciones personalizadas (Bootstrap no las incluye)
+.modal-backdrop {
   animation: fadeIn 0.3s ease-out;
 }
 
-.custom-modal {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  max-width: 500px;
-  width: 90%;
+.bg-white {
   animation: slideIn 0.3s ease-out;
-}
-
-.custom-modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 24px;
-  border-bottom: 1px solid #e9ecef;
-}
-
-.custom-modal-title {
-  margin: 0;
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #495057;
-}
-
-.custom-close-btn {
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: #6c757d;
-  padding: 0;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.custom-close-btn:hover {
-  color: #000;
-}
-
-.custom-modal-body {
-  padding: 32px 24px;
-  text-align: center;
-}
-
-.custom-modal-body i {
-  display: block;
-  margin-bottom: 16px;
-}
-
-.custom-modal-body p {
-  margin: 0;
-  color: #6c757d;
-  line-height: 1.5;
-}
-
-.custom-modal-footer {
-  padding: 20px 24px;
-  border-top: 1px solid #e9ecef;
-  display: flex;
-  justify-content: center;
 }
 
 @keyframes fadeIn {
