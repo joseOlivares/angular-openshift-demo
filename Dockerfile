@@ -1,4 +1,5 @@
 ### ETAPA 1: Construir la aplicación Angular ###
+# originalmente node:lts-alpine
 FROM node:lts-alpine AS build
 # Establecer directorio de trabajo
 WORKDIR /app

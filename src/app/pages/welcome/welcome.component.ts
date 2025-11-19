@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
 
 @Component({
@@ -14,12 +14,11 @@ export class WelcomeComponent implements OnInit {
   username: string = '';
   showModal: boolean = false;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.username = params['username'] || 'Usuario';
-    });
+    const navigation = this.router.getCurrentNavigation();
+    this.username = navigation?.extras?.state?.['username'] || 'Usuario';
   }
 
   openDashboard() {

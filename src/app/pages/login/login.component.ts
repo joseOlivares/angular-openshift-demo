@@ -26,7 +26,7 @@ export class LoginComponent {
   login(){
     if(this.loginForm.valid) {
       const username = this.loginForm.get('username')?.value;
-      this.router.navigate(['/welcome'], { queryParams: { username } });
+      this.router.navigate(['/welcome'], { state: { username } });
     }
   }
 
