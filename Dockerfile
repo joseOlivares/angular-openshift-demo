@@ -1,25 +1,25 @@
-### STAGE 1: Build the angular App ###
+### ETAPA 1: Construir la aplicación Angular ###
 FROM node:lts-alpine AS build
-# Set working directory
+# Establecer directorio de trabajo
 WORKDIR /app
-# Copy package.json and package-lock.json
+# Copiar package.json y package-lock.json
 COPY package*.json ./
-# Run a clean instalation of the dependencies
+# Ejecutar una instalación limpia de las dependencias
 RUN npm ci
-# install angular cli
+# Instalar Angular CLI
 RUN npm install -g @angular/cli
-# Copy all files
+# Copiar todos los archivos
 COPY . .
-# Build the Angular application
+# Construir la aplicación Angular
 RUN npm run build --configuration=production
 
 
-### STAGE 2: We use Nginx to serve the Angular app ###
+### ETAPA 2: Usamos Nginx para servir la aplicación Angular ###
 #FROM nginx:latest
 #Usamos la version sin privilegios porque es la que  funciona en openshift
 FROM nginxinc/nginx-unprivileged:stable-alpine
 
-# Copy the nginx configuration to replace the default nginx contents
+# Copiar la configuración de nginx para reemplazar el contenido por defecto de nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 ##*******************************************************************************
@@ -27,12 +27,12 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 ##*******************************************************************************
 ARG PROJECT_NAME=angular-openshift-demo
 
-#Copy the Angular build files to the Nginx server
+# Copiar los archivos de construcción de Angular al servidor Nginx
 COPY --from=build /app/dist/${PROJECT_NAME}/browser /usr/share/nginx/html
 
-# Expose port 8080 (required for OpenShift)
+# Exponer puerto 8080 (requerido para OpenShift)
 EXPOSE 8080
 
-# Start Nginx
+# Iniciar Nginx
 CMD ["nginx", "-g", "daemon off;"]
 

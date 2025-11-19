@@ -1,0 +1,17 @@
+@if (isVisible) {
+  <div class="custom-modal-backdrop" (click)="onBackdropClick($event)">
+    <div class="custom-modal">
+      <div class="custom-modal-header">
+        <h5 class="custom-modal-title">{{ title }}</h5>
+        <button type="button" class="custom-close-btn" (click)="onClose()">&times;</button>
+      </div>
+      <div class="custom-modal-body">
+        <i class="bi bi-exclamation-triangle text-warning" style="font-size: 3rem;"></i>
+        <p>{{ message }}</p>
+      </div>
+      <div class="custom-modal-footer">
+        <button type="button" class="btn btn-primary" (click)="onClose()">Entendido</button>
+      </div>
+    </div>
+  </div>
+}
